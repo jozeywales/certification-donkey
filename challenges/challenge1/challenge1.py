@@ -1,7 +1,5 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 class Challenge1(unittest.TestCase):
@@ -13,12 +11,8 @@ class Challenge1(unittest.TestCase):
         self.driver.close()
 
     def test_challenge1(self):
-        self.driver.get("https://www.copart.com")
-        self.assertIn("Copart", self.driver.title)
-        #self.driver.find_element(By.ID, "input-search")
-        searchelement = self.driver.find_element(By.ID, "input-search")
-        searchelement.send_keys("exotic" + Keys.ENTER)
-
+        self.driver.get("https://www.google.com")
+        self.assertIn("Google", self.driver.title)
 
 
 if __name__ == '__main__':
