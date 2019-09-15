@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 class Challenge1(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome("../chromedriver.exe")
+        self.driver = webdriver.Chrome("../../chromedriver.exe")
 
     def tearDown(self):
         self.driver.close()
