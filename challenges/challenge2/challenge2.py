@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class Challenge1(unittest.TestCase):
+class Challenge2(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome("../chromedriver.exe")
@@ -14,7 +14,7 @@ class Challenge1(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-    def test_challenge1(self):
+    def test_challenge2(self):
         self.driver.get("https://www.copart.com")
         self.assertIn("Copart", self.driver.title)
         #self.driver.find_element(By.ID, "input-search")
