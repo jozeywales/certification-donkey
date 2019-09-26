@@ -104,22 +104,6 @@ class Fieldname(unittest.TestCase):
         return
 
 
-        # 1. Find the popular search links
-        # try:
-        #     childSearchElements = WebDriverWait(self.driver, 30).until(
-        #         EC.presence_of_all_elements_located((By.XPATH, "//a[starts-with(@href,'./popular/m')]"))
-        # )
-        # except TimeoutError:
-        #     print("an exception occurred" + e)
-        #
-        # for element in childSearchElements:
-        #     link = element.get_attribute("href")
-        #     text = element.get_property("text")
-        #     print(text + ' ' + link)
-        #
-        #
-        # self.assertCountEqual(str(len(childSearchElements)),"20","The count of popular models is not 20")
-
 
 
 if __name__ == '__main__':
