@@ -32,6 +32,9 @@ class Challenge3(unittest.TestCase):
             print(text + ' ' + link)
 
 
+        self.assertCountEqual(str(len(childSearchElements)),"20","The count of popular models is not 20")
+
+
 
 if __name__ == '__main__':
     unittest.main()
