@@ -89,7 +89,7 @@ class Fieldname(unittest.TestCase):
         allElements = self.driver.find_elements_by_xpath("//*")
         #print(os.path.abspath('.')) # C:\projects\certification\challenges\shopdoterra
 
-        with open('./fieldnameElements.txt', 'a') as file_object:
+        with open('./fieldnameElements.txt', 'w') as file_object:
             for element in allElements:
                 fieldnameAttr = element.get_attribute("fieldname")
                 if str(fieldnameAttr) == "None":    # filter 'None'
