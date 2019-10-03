@@ -11,9 +11,9 @@ class Challenge4(unittest.TestCase):
 
     def test_begin(self):
         #self.driver = webdriver.Chrome("../chromedriver.exe")
-        answer = fibFuncs.fibLooping(15)
+        answer = fibFuncs.fibLooping(16)
         #b = fibFuncs.fibRecursive(9)
-        numInEnglish = self.numToText(answer)
+        self.numToText(answer)
 
     # fibonacci number to english translation
     def numToText(self, result):
@@ -41,9 +41,15 @@ class Challenge4(unittest.TestCase):
             while i < len(numText):
                 digitTxt += lessThan20.get(int(numText[int(i)])) + ' ' + decTerms.get(i) + ' '
                 i += 1
-                digitTxt += tensDigits.get(int(numText[i])) + ' '
+                if numText[1] != '0':
+                    digitTxt += tensDigits.get(int(numText[i])) + ' '
+                else:
+                    digitTxt += ''
                 i += 1
-                digitTxt += lessThan20.get(int(numText[int(i)]))
+                if numText[2] != '0':
+                    digitTxt += lessThan20.get(int(numText[int(i)]))
+                else:
+                    digitTxt += ''
                 i += 1
             print(numText + ' - ' + digitTxt)
 
