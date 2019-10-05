@@ -1,5 +1,7 @@
 import unittest
 from cmath import e
+from math import ceil
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,8 +13,9 @@ class Challenge4(unittest.TestCase):
 
     def test_begin(self):
         #self.driver = webdriver.Chrome("../chromedriver.exe")
-        answer = fibFuncs.fibLooping(16)
-        #b = fibFuncs.fibRecursive(9)
+        #answer = fibFuncs.fibLooping(5)
+        #answer = fibFuncs.fibRecursive(2)
+        answer = ceil(fibFuncs.myFib(20))
         self.numToText(answer)
 
     # fibonacci number to english translation
@@ -48,6 +51,30 @@ class Challenge4(unittest.TestCase):
                 i += 1
                 if numText[2] != '0':
                     digitTxt += lessThan20.get(int(numText[int(i)]))
+                else:
+                    digitTxt += ''
+                i += 1
+            print(numText + ' - ' + digitTxt)
+        elif len(numText) == 4:     # for numbers in the thousands
+            while i < len(numText):
+                digitTxt += lessThan20.get(int(numText[int(i)])) + ' ' + decTerms.get(i+1) + ' '
+                i += 1
+                if numText[0] != '0':
+                    digitTxt += lessThan20.get(int(numText[int(i)])) + ' '
+                else:
+                    digitTxt += ''
+                if numText[1] != '0':
+                    digitTxt += decTerms.get(i-1) + ' '
+                else:
+                    digitTxt += ''
+                i += 1
+                if numText[2] != '0':
+                    digitTxt += tensDigits.get(int(numText[i])) + ' '
+                else:
+                    digitTxt += ''
+                i += 1
+                if numText[3] != '0':
+                    digitTxt += lessThan20.get(int(numText[int(i)])) + ' '
                 else:
                     digitTxt += ''
                 i += 1
