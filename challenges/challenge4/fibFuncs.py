@@ -1,17 +1,23 @@
 from math import sqrt
 
-def fibLooping(n):
-    a,b = 1,1
-    for i in range(n-1):
-        a,b = b,a+b
-    return a
+class FibMethods():
+    '''A simple class that contains a fibonacci method'''
 
-def fibRecursive(n):
-    if n==1 or n==2:
-        return 1
-    return fibRecursive(n-1)+fibRecursive(n-2)
+    def __init__(self):
+        '''initialize'''
 
-def myFib(n):
-    if n==0:
-        return 1
-    return ((1+sqrt(5))**n-(1-sqrt(5))**n)/(2**n*sqrt(5))
+    def fibLooping(self, fibNum):
+        a,b = 1,1
+        for i in range(fibNum-1):
+            a,b = b,a+b
+        return a
+
+    def fibRecursive(self, fibNum):
+        if fibNum == 1 or fibNum == 2:
+            return 1
+        return self.fibRecursive(fibNum-1) + self.fibRecursive(fibNum-2)
+
+    def myFib(self, fibNum):
+        if fibNum == 0:
+            return 1
+        return ((1+sqrt(5))**fibNum-(1-sqrt(5))**fibNum)/(2**fibNum*sqrt(5))

@@ -1,12 +1,7 @@
 import unittest
 from cmath import e
 from math import ceil
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from challenges.challenge4 import fibFuncs
+from challenges.challenge4.fibFuncs import FibMethods
 
 
 class Challenge4(unittest.TestCase):
@@ -15,7 +10,8 @@ class Challenge4(unittest.TestCase):
         #self.driver = webdriver.Chrome("../chromedriver.exe")
         #answer = fibFuncs.fibLooping(5)
         #answer = fibFuncs.fibRecursive(2)
-        answer = ceil(fibFuncs.myFib(20))
+        myFibAnswer = FibMethods()
+        answer = ceil(myFibAnswer.myFib(20))
         self.numToText(answer)
 
     # fibonacci number to english translation
