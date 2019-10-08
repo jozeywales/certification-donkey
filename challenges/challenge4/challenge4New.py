@@ -12,7 +12,7 @@ class Challenge4(unittest.TestCase, FibMethods):
         #answer = fibFuncs.fibLooping(5)
         #answer = fibFuncs.fibRecursive(2)
         my_fibMethods = FibMethods()
-        answer = ceil(my_fibMethods.myFib(32))
+        answer = ceil(my_fibMethods.fibFormula(38))
         self.convertToText(answer)
         self.displayResult()
 
@@ -45,20 +45,32 @@ class Challenge4(unittest.TestCase, FibMethods):
                 if int(numTwoDigits) < 20:
                     self.digitText += lessThan20.get(int(numTwoDigits)) + ' ' + decimalGroups.get(numGroups) + ' ' # 10, 11, 12, 13.. + hundred, thousand, ...
                 else:
-                    self.digitText += tensDigits.get(int(numTwoDigits[0])) + ' ' + lessThan20.get(int(numTwoDigits[1]))  + ' '   # twenty, thirty, forty... + one, two, three, ...
-                    decimalGroups.get(numGroups) + ' '     # + hundred, thousand, million...
+                    self.digitText += tensDigits.get(int(numTwoDigits[0])) + ' ' + lessThan20.get(int(numTwoDigits[1]))  + ' ' \
+                                      + decimalGroups.get(numGroups) + ' '    # + hundred, thousand, million...
                 numLength -= 2
                 idx += 2
             elif divmod(numLength,3)[1] == 0:    # msg has 3 digits
-                self.digitText += lessThan20.get(int(self.numText[idx])) + ' ' + decimalGroups.get(1) + ' '
+                #print(lessThan20.get(self.numText[idx]))
+                if lessThan20.get(self.numText[idx]) != None:
+                    self.digitText += lessThan20.get(int(self.numText[idx])) + ' ' + decimalGroups.get(1) + ' '
                 if int((self.numText[idx+1])+(self.numText[idx+2])) < 20:  # if 2 digit number in the tens or ones place is < 20
-                    self.digitText += lessThan20.get(int((self.numText[idx+1]) + self.numText[idx+2]))
+                    if numGroups > 1:
+                        self.digitText += lessThan20.get(int((self.numText[idx+1]) + self.numText[idx+2])) + ' ' + decimalGroups.get(numGroups) + ' '
+                    else:
+                        self.digitText += lessThan20.get(int((self.numText[idx + 1]) + self.numText[idx + 2]))
+                elif numGroups > 1:
+                    if (int(self.numText[idx+2])) == 0:
+                        self.digitText += (tensDigits.get(int(self.numText[idx+1])) + lessThan20.get(int(self.numText[idx+2])) + ' ' + decimalGroups.get(numGroups) + ' ')
+                    else:
+                        self.digitText += (tensDigits.get(int(self.numText[idx+1])) + ' ' + lessThan20.get(int(self.numText[idx+2])) + ' ' + decimalGroups.get(numGroups) + ' ')
                 else:
-                    self.digitText += (tensDigits.get(int(self.numText[idx+1])) + ' ' + lessThan20.get(int(self.numText[idx+2])) + ' ' + decimalGroups.get(numGroups) + ' ')
+                    self.digitText += (tensDigits.get(int(self.numText[idx + 1])) + ' ' + lessThan20.get(int(self.numText[idx + 2])))
                 numLength -= 3
                 idx += 3
             numGroups -= 1
-            i += 1
+            if numGroups != 1:  # no need to increment i on the last group of 3 digits
+                i += 1
+
 
 
     def displayResult(self):
