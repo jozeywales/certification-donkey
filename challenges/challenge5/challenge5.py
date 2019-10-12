@@ -39,7 +39,7 @@ class Challenge5(unittest.TestCase):
 
         # 1. Find all the models of Porsche
         searchPorscheModels = WebDriverWait(self.driver, 20).until(
-            EC.presence_of_all_elements_located((By.XPATH, "//span[@data-uname='lotsearchLotmodel']/../span")))
+            EC.visibility_of_all_elements_located((By.XPATH, "//td//span[@data-uname='lotsearchLotmodel']")))
 
         try:
             for element in searchPorscheModels:
@@ -50,7 +50,7 @@ class Challenge5(unittest.TestCase):
         porscheModelSet = set(porscheModelList)
 
         print("The number of distinct porsche models is: " + str(len(porscheModelSet)))
-        print()
+        print("The distinct models are: " + str(porscheModelSet))
 
 
 
