@@ -15,6 +15,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
 
     def setUp(self):
         self.driver = webdriver.Chrome("../chromedriver.exe")
+        self.driver.maximize_window()
         self.driver.get("https://www.copart.com")
         self.assertIn("Copart", self.driver.title)
 
@@ -30,6 +31,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
         '''
         supportCh5 = SupportCh5(self.driver)
         porscheModelList = []
+        modelCount = dict()
 
         supportCh5.search_init("porsche")
 
@@ -50,7 +52,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
 
         # count how many of each model
         porscheModelList.sort()
-        modelCount = dict()
+
         for model in porscheModelList:
             modelCount[model] = porscheModelList.count(model)
 
@@ -62,14 +64,35 @@ class Challenge5(unittest.TestCase, SupportCh5):
 
 
     def test_challenge5_part2(self):
-        supportCh5 = SupportCh5(self.driver)
-        porscheModelList = []
+        supportCh5p2 = SupportCh5(self.driver)
+        porscheDamagesList = []
 
-        supportCh5.search_init("porsche")
+        supportCh5p2.search_init("porsche")
 
-        select_list, selected_opton = supportCh5.setShowEntries("100")
+        select_list, selected_opton = supportCh5p2.setShowEntries("100")
         selected_option = select_list.first_selected_option.text
         assert selected_option == '100', "The Show dropdown select option is not 100 entries"
+
+        # 1. get a list of all the porsche models damages elements
+        locstring = "//*[@id='serverSideDataTable']//td[12]"
+        allDamageElems = WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_all_elements_located((By.XPATH, locstring)))
+
+        # 2. make a list of damages and sort the list
+        for damage in allDamageElems:
+            porscheDamagesList.append(damage.text)
+
+        porscheDamagesList.sort()
+
+        # 3. count how many different damage types there are.
+        #damageCount = dict()
+
+        result = supportCh5p2.countDamages(1)
+
+        #for damage in porscheDamagesList:
+        #    damageCount[damage] = porscheDamagesList.count(damage)
+
+        # 4. build a switch statement that is ^^ count long, iterate the list and
 
         print("   111   ")
 

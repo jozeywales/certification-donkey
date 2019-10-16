@@ -5,10 +5,10 @@ from selenium.webdriver.support.select import Select as WebDriverSelect
 
 class SupportCh5():
     '''A class that contains supporting methods for Challenge5 tests.'''
-
     def __init__(self, driver):
         '''initialize'''
         self.driver = driver
+        self.i = 0
 
     def launchSite(self, url):
         '''Launches a site at the "url" param'''
@@ -50,3 +50,28 @@ class SupportCh5():
             return element
         except (Exception) as e:
             print("Error occurred:", e)
+
+
+    def rearEnd(self):
+        self.i+=1
+        return self.i
+    def frontEnd(self):
+        return
+    def minorDent_Scratches(self):
+        return
+    def underCarriage(self):
+        return
+    def misc(self):
+        return
+
+    switcher = {
+        1: rearEnd,
+        2: frontEnd,
+        3: minorDent_Scratches,
+        4: underCarriage,
+        5: misc
+    }
+
+    def countDamages(self, damageTypes):
+        return self.switcher.get(damageTypes, self.misc())(self)
+
