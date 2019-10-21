@@ -51,27 +51,47 @@ class SupportCh5():
         except (Exception) as e:
             print("Error occurred:", e)
 
-
+    # the methods that are called from countDamages based on the switcher dictionary
     def rearEnd(self):
-        self.i+=1
-        return self.i
-    def frontEnd(self):
-        return
-    def minorDent_Scratches(self):
-        return
-    def underCarriage(self):
-        return
-    def misc(self):
-        return
+        return "REAR END"
 
+    def frontEnd(self):
+        return "FRONT END"
+
+    def minorDent_Scratches(self):
+        return "MINOR DENT/SCRATCHES"
+
+    def underCarriage(self):
+        return "UNDERCARRIAGE"
+
+    def misc(self):
+        return "misc"
+
+    # the switcher dictionary is the foundation for what methods to call
     switcher = {
-        1: rearEnd,
-        2: frontEnd,
-        3: minorDent_Scratches,
-        4: underCarriage,
-        5: misc
+        0: rearEnd,
+        1: frontEnd,
+        2: minorDent_Scratches,
+        3: underCarriage,
+        4: misc
     }
 
+    # loop through the VALUES of the passed-in dictionary and call the
+    # corresponding method with the key from the dict get() method.
     def countDamages(self, damageTypes):
-        return self.switcher.get(damageTypes, self.misc())(self)
+        for x in damageTypes.values():
+            result = self.switcher.get(x)(self)
+            if result == "misc":
+                print("misc count")
+            elif result == "FRONT END":
+                print("FRONT END")
+            elif result == "REAR END":
+                print("REAR END")
+            elif result == "MINOR DENT/SCRATCHES":
+                print("MINOR DENT/SCRATCHES")
+            elif result == "UNDERCARRIAGE":
+                print("UNDERCARRIAGE")
+
+    print("   ***   That is all!   ***   ")
+
 

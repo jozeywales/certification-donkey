@@ -78,21 +78,34 @@ class Challenge5(unittest.TestCase, SupportCh5):
         allDamageElems = WebDriverWait(self.driver, 20).until(
             EC.visibility_of_all_elements_located((By.XPATH, locstring)))
 
-        # 2. make a list of damages and sort the list
+        # 2. make a list of damages
         for damage in allDamageElems:
             porscheDamagesList.append(damage.text)
 
+        # sort the list
         porscheDamagesList.sort()
 
-        # 3. count how many different damage types there are.
-        #damageCount = dict()
+        # create a dictionary containing the coded types as values, ie. 1="REAR END", 2="FRONT END",,,
+        damageTypesDict = {}
+        for x in range(len(porscheDamagesList)):
+            if porscheDamagesList[x] == "REAR END":
+                type = 0
+                damageTypesDict[x] = type
+            elif porscheDamagesList[x] == "FRONT END":
+                type = 1
+                damageTypesDict[x] = type
+            elif porscheDamagesList[x] == "MINOR DENT/SCRATCHES":
+                type = 2
+                damageTypesDict[x] = type
+            elif porscheDamagesList[x] == "UNDERCARRIAGE":
+                type = 3
+                damageTypesDict[x] = type
+            else:
+                type = 4
+                damageTypesDict[x] = type
 
-        result = supportCh5p2.countDamages(1)
-
-        #for damage in porscheDamagesList:
-        #    damageCount[damage] = porscheDamagesList.count(damage)
-
-        # 4. build a switch statement that is ^^ count long, iterate the list and
+        # 4. Call/build a switch statement and iterate the list
+        supportCh5p2.countDamages(damageTypesDict)
 
         print("   111   ")
 
