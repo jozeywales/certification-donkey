@@ -16,15 +16,6 @@ class SupportCh5():
         self.miscCount = miscCount
 
 
-    def launchSite(self, url):
-        '''Launches a site at the "url" param'''
-        try:
-            element = WebDriverWait(self.driver, 20).until(
-                EC.url_contains(url)
-            )
-        except (Exception) as e:
-            print("Error occurred:", e)
-
     def search_init(self, searchToken):
         '''
         Performs a search on a site with 'searchToken' in the search control

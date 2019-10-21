@@ -63,6 +63,8 @@ class Challenge5(unittest.TestCase, SupportCh5):
         for x, y in modelCount.items():
             print("{:11s} -> count = {}".format(x, y))
 
+        print("***   That is all for part 1.   ***\n")
+
 
     def test_challenge5_part2(self):
         '''
@@ -114,7 +116,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
         # 4. Call/build a switch statement and iterate the list
         supportCh5p2.countDamages(damageTypesDict)
 
-        print("***   That is all.   ***")
+        print("***   That is all for part 2.   ***\n")
 
 
 if __name__ == '__main__':
