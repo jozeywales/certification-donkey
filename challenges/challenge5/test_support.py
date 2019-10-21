@@ -5,10 +5,16 @@ from selenium.webdriver.support.select import Select as WebDriverSelect
 
 class SupportCh5():
     '''A class that contains supporting methods for Challenge5 tests.'''
-    def __init__(self, driver):
+    def __init__(self, driver, rearEndCount=0, frontEndCount=0, minorDSCount=0,
+                 underCarrCount=0, miscCount=0):
         '''initialize'''
         self.driver = driver
-        self.i = 0
+        self.rearEndCount=rearEndCount
+        self.frontEndCount=frontEndCount
+        self.minorDSCount=minorDSCount
+        self.underCarrCount=underCarrCount
+        self.miscCount = miscCount
+
 
     def launchSite(self, url):
         '''Launches a site at the "url" param'''
@@ -51,21 +57,21 @@ class SupportCh5():
         except (Exception) as e:
             print("Error occurred:", e)
 
-    # the methods that are called from countDamages based on the switcher dictionary
+    # the methods below that are called from countDamages() based on the switcher dictionary
     def rearEnd(self):
-        return "REAR END"
+        self.rearEndCount += 1
 
     def frontEnd(self):
-        return "FRONT END"
+        self.frontEndCount += 1
 
     def minorDent_Scratches(self):
-        return "MINOR DENT/SCRATCHES"
+        self.minorDSCount += 1
 
     def underCarriage(self):
-        return "UNDERCARRIAGE"
+        self.underCarrCount += 1
 
     def misc(self):
-        return "misc"
+        self.miscCount += 1
 
     # the switcher dictionary is the foundation for what methods to call
     switcher = {
@@ -77,21 +83,14 @@ class SupportCh5():
     }
 
     # loop through the VALUES of the passed-in dictionary and call the
-    # corresponding method with the key from the dict get() method.
+    # corresponding method using the key from the dict get() method.
     def countDamages(self, damageTypes):
         for x in damageTypes.values():
-            result = self.switcher.get(x)(self)
-            if result == "misc":
-                print("misc count")
-            elif result == "FRONT END":
-                print("FRONT END")
-            elif result == "REAR END":
-                print("REAR END")
-            elif result == "MINOR DENT/SCRATCHES":
-                print("MINOR DENT/SCRATCHES")
-            elif result == "UNDERCARRIAGE":
-                print("UNDERCARRIAGE")
+            self.switcher.get(x)(self)
 
-    print("   ***   That is all!   ***   ")
-
+        print("Rear End damage count is {}.".format(self.rearEndCount))
+        print("Front End damage count is {}.".format(self.frontEndCount))
+        print("Minor Dents & Scratches damage count is {}.".format(self.minorDSCount))
+        print("Under Carriage damage count is {}.".format(self.underCarrCount))
+        print("All other damage count is {}.".format(self.miscCount))
 

@@ -27,21 +27,22 @@ class Challenge5(unittest.TestCase, SupportCh5):
         '''
         This test goes to https://www.copart.com and does a search for "porsche". It then changes
         the drop down for "Show Entries" to 100 from 20. It then counts the number of different
-        porsche models in the results of the first page and how many of each type exists.
+        porsche models in the results of the first page and how many of each type exists and
+        prints the stats to the console.
         '''
-        supportCh5 = SupportCh5(self.driver)
+        supportCh5p1 = SupportCh5(self.driver)
         porscheModelList = []
         modelCount = dict()
 
-        supportCh5.search_init("porsche")
+        supportCh5p1.search_init("porsche")
 
-        select_list, selected_opton = supportCh5.setShowEntries("100")
+        select_list, selected_opton = supportCh5p1.setShowEntries("100")
         selected_option = select_list.first_selected_option.text
         assert selected_option == '100', "The Show dropdown select option is not 100 entries"
 
 
         # 1. Find all the models of Porsche
-        results = supportCh5.findModels()
+        results = supportCh5p1.findModels()
         self.assertTrue(len(results)==100, "The list of Porsche models is not 100")
 
         for element in results:
@@ -64,6 +65,12 @@ class Challenge5(unittest.TestCase, SupportCh5):
 
 
     def test_challenge5_part2(self):
+        '''
+        This test goes to https://www.copart.com and does a search for "porsche". It then changes
+        the drop down for "Show Entries" to 100 from 20. From a switch statement created from a
+        dictionary it counts the number of several types of damages and prints those stats to
+        the console.
+        '''
         supportCh5p2 = SupportCh5(self.driver)
         porscheDamagesList = []
 
@@ -107,7 +114,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
         # 4. Call/build a switch statement and iterate the list
         supportCh5p2.countDamages(damageTypesDict)
 
-        print("   111   ")
+        print("***   That is all.   ***")
 
 
 if __name__ == '__main__':
