@@ -23,7 +23,7 @@ class Challenge5(unittest.TestCase, SupportCh5):
     def tearDown(self):
         self.driver.close()
 
-    def test_challenge5(self):
+    def test_challenge5_part1(self):
         '''
         This test goes to https://www.copart.com and does a search for "porsche". It then changes
         the drop down for "Show Entries" to 100 from 20. It then counts the number of different
