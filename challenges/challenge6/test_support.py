@@ -1,3 +1,4 @@
+from fixtures import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,6 +21,7 @@ class SupportCh6():
         except (Exception) as e:
             print("Error occurred:", e)
 
+
     def setShowEntries(self, value):
         '''
         Selects the Show Entries drop down control to select and verify the 100 option.
@@ -33,3 +35,14 @@ class SupportCh6():
             return select_list, selected_option
         except (Exception) as e:
             print("Error occurred:", e)
+
+
+    def findSkylineModels(self, modelType):
+        try:
+            elements = searchPorscheModels = WebDriverWait(self.driver, 3).until(
+                EC.visibility_of_all_elements_located(
+                    (By.XPATH, "//td//span[@data-uname='lotsearchLotmodel'and contains(text(), '{}')]".format(modelType))))
+            return elements
+        except (TimeoutException) as e:
+            print("Error occurred: model not found" + ' ' + str(e))
+
