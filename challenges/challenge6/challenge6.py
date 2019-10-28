@@ -25,47 +25,71 @@ class Challenge6(unittest.TestCase, SupportCh6):
         self.driver.close()
 
     def test_challenge6p1(self):
-
+        '''
+        This is a solution for Challenge 6 I call p1 or part 1. This test first tries to find the
+        'SKYLINE' model within the first 100 search results in the try-except-else block after
+        doing a general search for the make of 'nissan'. Whether or not the model is found a
+        screenShot will be taken. It will then search the entire site including and beyond the
+        first 100 search results via the searchAllSite() method and either way will take another
+        distinct screenShot.
+        '''
         supportCh6p1 = SupportCh6(self.driver)
         modelDesc = "SKYLINE"
+        makeDesc = 'Nissan'
 
-        supportCh6p1.search_init("nissan")
+        # Search for the make.
+        supportCh6p1.search_init(makeDesc)
 
         select_list, selected_option = supportCh6p1.setShowEntries("100")
         selected_option = select_list.first_selected_option.text
         assert selected_option == '100', "The Show dropdown select option is not 100 entries"
 
         # search for the text 'SKYLINE' in the first 100 models of Nissan.
-        elements = supportCh6p1.findSkylineModels(modelDesc)
+        try:
+            elements = supportCh6p1.findModels100(modelDesc)
+        except (TimeoutException) as e:
+            print(f"There were no {makeDesc} {modelDesc} models found in the first 100 search results")
+            print("Now a search of the entire site will be executed: ")
+            self.driver.save_screenshot(modelDesc + "NotFoundScreenShot6sp1.png")
+        else:
+            print(f"A {makeDesc} {modelDesc} was found in the first 100 search results.")
+            self.driver.save_screenshot(modelDesc + "FoundIn100ScreenShot6sp1.png")
 
-        #self.assertTrue(elements != None, "The Nissan Skyline model was not found.")
-
-        # for model in elements:
-        #     if model.text == modelDesc:
-        #         print("The model {} was found".format(modelDesc))
-        #         break
-        #     else:
-        #         print("The model {} was NOT found.".format(modelDesc))
+        # use the Search control and search all of the site
+        srchCntrlLoc = "//div[@id='serverSideDataTable_filter']//input[@type='search']"
+        elem = supportCh6p1.getSearchCntrl(srchCntrlLoc)
+        elem.send_keys(modelDesc.lower())
+        xLocator = "//td//span[@data-uname='lotsearchLotmodel'][starts-with(text(),'SKYLINE')]"
+        supportCh6p1.searchAllSite(xLocator, modelDesc)
 
         print("    ****    ")
 
     def test_challenge6p2(self):
+        '''
+        This is a solution for Challenge6 p2 or part 2. It's another variation of searching for
+        the 'SKYLINE' model after the initial search for the make of 'nissan'. It looks within
+        the first 100 search results only. The try block is a little more detailed than p1 above.
+        '''
         supportCh6p2 = SupportCh6(self.driver)
         modelDesc = "SKYLINE"
+        makeDesc = "Nissan"
 
-        supportCh6p2.search_init("nissan")
+        # Search for the make.
+        supportCh6p2.search_init(makeDesc)
 
-        locator = "//*[@id='lot_model_descSKYLINE']"
+        locator = f"//td//span[@data-uname='lotsearchLotmodel'][contains(text(), '{modelDesc}')]"
 
+        # Attempt to find a Skyline model within the 1st 100 search results
         try:
-            self.driver.find_element(By.XPATH, locator)
-        except (NoSuchElementException) as e:
-            print("Couldn't find the element: " + str(e))
+            supportCh6p2.findModels100(modelDesc)
+        except (Exception) as e:
+            print(f"Could not find a {makeDesc} {modelDesc}: " + str(e))
+            self.driver.save_screenshot(modelDesc + "NotFoundScreenShot6sp2.png")
         except (TimeoutException) as e:
             print("A timeout occured: " + str(e))
-            supportCh6p2.findSkylineModels(modelDesc)
+            self.driver.save_screenshot(modelDesc + "NotFoundScreenShotTimeout6sp1.png")
         else:
-            print("In the else clause.")
+            print(f"Yup, I found a {makeDesc} {modelDesc}. Here's a screenshot.")
+            self.driver.save_screenshot(modelDesc + "screenshot6p2.png")
         finally:
-            self.driver.save_screenshot(modelDesc + "screenshot.png")
-            print("The 'try except else' has finished.")
+            print("The 'try-except-else-finally' has finished.")
