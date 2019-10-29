@@ -55,7 +55,7 @@ class Challenge6(unittest.TestCase, SupportCh6):
             print(f"A {makeDesc} {modelDesc} was found in the first 100 search results.")
             self.driver.save_screenshot(modelDesc + "FoundIn100ScreenShot6sp1.png")
 
-        # use the Search control and search all of the site
+        # use the Search control and search all of the site and find how many models of Skyline there are
         srchCntrlLoc = "//div[@id='serverSideDataTable_filter']//input[@type='search']"
         elem = supportCh6p1.getSearchCntrl(srchCntrlLoc)
         elem.send_keys(modelDesc.lower())
@@ -89,7 +89,7 @@ class Challenge6(unittest.TestCase, SupportCh6):
             print("A timeout occured: " + str(e))
             self.driver.save_screenshot(modelDesc + "NotFoundScreenShotTimeout6sp1.png")
         else:
-            print(f"Yup, I found a {makeDesc} {modelDesc}. Here's a screenshot.")
+            print(f"Yup, I found {supportCh6p2.countModelsFound(modelDesc)} {makeDesc} {modelDesc}s. Here's a screenshot.")
             self.driver.save_screenshot(modelDesc + "screenshot6p2.png")
         finally:
             print("The 'try-except-else-finally' has finished.")

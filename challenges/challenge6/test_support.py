@@ -50,11 +50,20 @@ class SupportCh6():
         return element
 
     def searchAllSite(self, modelLocator, modelToSearch):
+        results = None
         try:
-            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, modelLocator)))
+            results = WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located((By.XPATH, modelLocator)))
         except (NoSuchElementException) as e:
             print(f"There were no models of {modelToSearch} found on the entire site: " + str(e))
             self.driver.save_screenshot(modelToSearch + "notFoundAllSrch6sp1.png")
         else:
-            print(f"Found a {modelToSearch} model beyond the first 100 results. Take a screenShot")
+            print(f"Found a {modelToSearch} model beyond the first 100 search results.")
+            print(f"Total number of {modelToSearch}s found were {self.countModelsFound(results)}. Take a screenShot")
             self.driver.save_screenshot(modelToSearch + "foundAllSrch6sp1.png")
+
+    # count the number of Skyline models found
+    def countModelsFound(self, modelCount):
+        num = 0
+        for model in modelCount:
+            num += 1
+        return num
