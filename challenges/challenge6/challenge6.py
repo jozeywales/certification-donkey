@@ -1,14 +1,6 @@
-import time
 import unittest
-from cmath import e
-
 from selenium import webdriver
-from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException, TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.select import Select as WebDriverSelect
+from selenium.common.exceptions import TimeoutException
 from challenges.challenge6.test_support import SupportCh6
 
 
@@ -64,6 +56,7 @@ class Challenge6(unittest.TestCase, SupportCh6):
 
         print("    ****    ")
 
+
     def test_challenge6p2(self):
         '''
         This is a solution for Challenge6 p2 or part 2. It's another variation of searching for
@@ -93,3 +86,7 @@ class Challenge6(unittest.TestCase, SupportCh6):
             self.driver.save_screenshot(modelDesc + "screenshot6p2.png")
         finally:
             print("The 'try-except-else-finally' has finished.")
+
+
+if __name__ == '__main__':
+    unittest.main()
