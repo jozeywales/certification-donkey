@@ -2,13 +2,14 @@ import unittest
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from challenges.challenge6.test_support import SupportCh6
+from challenges.challenge7.DriverManager import DriverManager
 
 
 class Challenge7(unittest.TestCase, SupportCh6):
 
     def setUp(self):
         #driver = driverManager.getDriver("chrome", "http://www.copart.com")
-        driver = driverManager.getDriver("chrome", "", "iPhone")
+        driver = DriverManager.getDriver("chrome", "iPhone")
         #driver = driverManager.getDriver("firefox")
         #driver = driverManager.getDriver("internet explorer")
         #driver = driverManager.getDriver("chrome")

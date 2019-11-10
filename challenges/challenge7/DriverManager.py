@@ -1,50 +1,34 @@
+from selenium import webdriver
+from selenium.webdriver.common import desired_capabilities
+
+
 class DriverManager():
-    def __init__(self, browser, mobileType):
-        self.browser = browser
-        self.mobileType = mobileType
-    #if (browser == "firefox") {
-    # console.log("create a new firefox browser")
-    # var driver = new webdriver.Builder()
-    # .forBrowser("firefox").build()
-    # }
-    #if (browser == "internet explorer"){
-    # console.log("create a new IExplorer browser")
-    # var driver = new webdriver.Builder()
-    # .forBrowser("internet explorer").build()
-    # } ...
 
-    # var driver = new webdriver.Builder().forBrowser(browser).build()
+    def getDriver(self, browser, mobileType):
 
-    #builder = webdriver.Builder()
-    # builder.forBrowser("chrome")
-    # builder.build()
 
-    # if rm != null:
-    #     builder.usingServer(rm)
-    def getDriver(self):
-        if self.browser == None:
+        if browser == None:
             browser = 'chrome'
-        print(self.browser.lower())
-        #builder.forBrowser(browser.toLowerCase())
+        print(browser.lower())
 
-        if self.browser.lower() == 'chrome' and self.mobileType != None:
-            caps = {
-                browserName: "chrome",
-                chromeOptions: {
-                    mobileEmuilation: {
-                        deviceName: mobileType
-                        # deviceName: 'iPhone X'
-                    }
-                }
-            }
+        if browser.lower() == 'chrome' and mobileType == None:
+            #caps = {"browserName": "chrome"}
+            caps = desired_capabilities.DesiredCapabilities.CHROME
+            caps['browserName'] = browser
+            caps['platform'] = 'WINDOWS'
+            caps['version'] = '10'
+
+        driver = webdriver.Remote(desired_capabilities=caps)
+
         #builder.withCapabilities(caps)
         # const {Options} = require("selenium-webdriver/chrome")
         # builder.setChromeOptions(new Options().setMobileEmulation({deviceName: "iPhone X"}))
 
-        driver = builder.build()
+        #driver = builder.build()
+
 
         if mobileType == None:
             # maximizing chrome browser
-            driver.manage().window().maximize()
+            driver.maximize_window()
 
         return driver
