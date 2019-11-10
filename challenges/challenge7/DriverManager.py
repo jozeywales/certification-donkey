@@ -13,13 +13,15 @@ class DriverManager():
         print(browser.lower())
 
         if browser.lower() == 'chrome' and mobileType == '':
-            #caps = {"browserName": "chrome"}
             caps = desired_capabilities.DesiredCapabilities.CHROME
-            caps["browserName"] = browser
-            caps["platform"] = 'WINDOWS'
-            caps["version"] = '10'
+            # caps["browserName"] = browser
+            # caps["platform"] = 'WINDOWS'
+            # caps["version"] = '10'
+            self.driver = webdriver.Chrome(desired_capabilities=caps)
 
-        driver = webdriver.Chrome(desired_capabilities=caps)
+        if browser.lower() == 'firefox' and mobileType == '':
+            caps = desired_capabilities.DesiredCapabilities.FIREFOX
+            self.driver = webdriver.Firefox(desired_capabilities=caps)
 
         #builder.withCapabilities(caps)
         # const {Options} = require("selenium-webdriver/chrome")
@@ -27,9 +29,8 @@ class DriverManager():
 
         #driver = builder.build()
 
-
         if mobileType == '':
             # maximizing chrome browser
-            driver.maximize_window()
+            self.driver.maximize_window()
 
-        return driver
+        return self.driver
