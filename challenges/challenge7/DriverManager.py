@@ -4,21 +4,22 @@ from selenium.webdriver.common import desired_capabilities
 
 class DriverManager():
 
-    def getDriver(self, browser, mobileType):
+    def getDriver(self, browser, mobileType=''):
 
+        caps = {}
 
         if browser == None:
             browser = 'chrome'
         print(browser.lower())
 
-        if browser.lower() == 'chrome' and mobileType == None:
+        if browser.lower() == 'chrome' and mobileType == '':
             #caps = {"browserName": "chrome"}
             caps = desired_capabilities.DesiredCapabilities.CHROME
-            caps['browserName'] = browser
-            caps['platform'] = 'WINDOWS'
-            caps['version'] = '10'
+            caps["browserName"] = browser
+            caps["platform"] = 'WINDOWS'
+            caps["version"] = '10'
 
-        driver = webdriver.Remote(desired_capabilities=caps)
+        driver = webdriver.Chrome(desired_capabilities=caps)
 
         #builder.withCapabilities(caps)
         # const {Options} = require("selenium-webdriver/chrome")
@@ -27,7 +28,7 @@ class DriverManager():
         #driver = builder.build()
 
 
-        if mobileType == None:
+        if mobileType == '':
             # maximizing chrome browser
             driver.maximize_window()
 
