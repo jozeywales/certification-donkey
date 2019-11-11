@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common import desired_capabilities
+from selenium.webdriver import ChromeOptions
 from selenium.webdriver import ie
 
 
@@ -14,6 +15,8 @@ class DriverManager():
         print(browser.lower())
 
         if browser.lower() == 'chrome' and mobileType == '':
+            #options = ChromeOptions()
+            #options.to_capabilities()
             caps = desired_capabilities.DesiredCapabilities.CHROME
             # caps["browserName"] = browser
             # caps["platform"] = 'WINDOWS'
@@ -22,12 +25,14 @@ class DriverManager():
 
         if browser.lower() == 'firefox' and mobileType == '':
             caps = desired_capabilities.DesiredCapabilities.FIREFOX
-            self.driver = webdriver.Firefox(desired_capabilities=caps)
+            self.driver = webdriver.Firefox(".\\browserdrivers", desired_capabilities=caps)
 
         if browser.lower() == 'internet explorer':
-            #caps = desired_capabilities.DesiredCapabilities.INTERNETEXPLORER
+            caps = desired_capabilities.DesiredCapabilities.INTERNETEXPLORER
+            caps["platform"] = 'WINDOWS'
+            caps["version"] = '10'
             #caps['webdriver.Ie'] = '%USERPROFILE%\\projects\\drivers'
-            self.driver = webdriver.Ie()
+            self.driver = webdriver.Ie('c:\\users\jsteele\\projects\\drivers\\IEDriverServer.exe')
 
         if browser.lower() == 'microsoftedge':
             caps = desired_capabilities.DesiredCapabilities.EDGE
