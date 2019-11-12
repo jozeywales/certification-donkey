@@ -10,13 +10,20 @@ class DriverManager():
 
         caps = {}
 
-        if browser == '':
+        browserList = {
+            "chrome": "",
+            "firefox": "",
+            "opera": "",
+            "internet explorer": "",
+            "microsoftedge": ""
+        }
+
+        if browser.lower() not in browserList:
             browser = 'chrome'
         print(browser.lower())
 
-        if browser.lower() == 'chrome' and mobileType == '':
-            #options = ChromeOptions()
-            #options.to_capabilities()
+        if browser.lower() in browserList and mobileType == '':
+            browserVen = str(browserList[browser]).upper()
             caps = desired_capabilities.DesiredCapabilities.CHROME
             # caps["browserName"] = browser
             # caps["platform"] = 'WINDOWS'
