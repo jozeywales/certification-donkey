@@ -1,7 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common import desired_capabilities
-from selenium.webdriver import ChromeOptions
-from selenium.webdriver import ie
 
 
 class DriverManager():
@@ -10,36 +8,29 @@ class DriverManager():
 
         caps = {}
 
-        browserList = {
-            "chrome": "",
-            "firefox": "",
-            "opera": "",
-            "internet explorer": "",
-            "microsoftedge": ""
-        }
+        # if self.browser.lower() == '':
+        #     browser = 'chrome'
+        # print(self.browser.lower())
 
-        if browser.lower() not in browserList:
-            browser = 'chrome'
-        print(browser.lower())
-
-        if browser.lower() in browserList and mobileType == '':
-            browserVen = str(browserList[browser]).upper()
-            caps = desired_capabilities.DesiredCapabilities.CHROME
-            # caps["browserName"] = browser
+        if browser.lower() == 'chrome' and mobileType == '':
+            #caps = desired_capabilities.DesiredCapabilities.CHROME
+            caps["browserName"] = browser
             # caps["platform"] = 'WINDOWS'
             # caps["version"] = '10'
-            self.driver = webdriver.Chrome(desired_capabilities=caps)
+            # self.driver = webdriver.Chrome(desired_capabilities=caps)
+            temp = self.getWebdriver(browser)
+            self.driver = exec(temp)()
 
-        if browser.lower() == 'firefox' and mobileType == '':
+        if browser.lower() in 'firefox' and mobileType == '':
             caps = desired_capabilities.DesiredCapabilities.FIREFOX
-            self.driver = webdriver.Firefox(".\\browserdrivers", desired_capabilities=caps)
+            self.driver = webdriver.Firefox(desired_capabilities=caps)
 
         if browser.lower() == 'internet explorer':
             caps = desired_capabilities.DesiredCapabilities.INTERNETEXPLORER
             caps["platform"] = 'WINDOWS'
             caps["version"] = '10'
             #caps['webdriver.Ie'] = '%USERPROFILE%\\projects\\drivers'
-            self.driver = webdriver.Ie('c:\\users\jsteele\\projects\\drivers\\IEDriverServer.exe')
+            self.driver = webdriver.Ie(desired_capabilities=caps)
 
         if browser.lower() == 'microsoftedge':
             caps = desired_capabilities.DesiredCapabilities.EDGE
@@ -60,3 +51,8 @@ class DriverManager():
             self.driver.maximize_window()
 
         return self.driver
+
+    def getWebdriver(self, browser_name):
+            print("webdriver" + "." + browser_name.title())
+            return "webdriver" + "." + browser_name.title()
+
