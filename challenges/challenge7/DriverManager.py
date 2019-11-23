@@ -8,28 +8,34 @@ class DriverManager():
         self.driver = driver
 
     def getDriver(self, browser='', mobileType=''):
+        command = ''
 
         browser_dict = {
             'chrome':'webdriver.Chrome(\"../chromedriver.exe\")',
             'firefox':'webdriver.Firefox()',
             'internet explorer':'webdriver.Ie(\"%USERPROFILE%\\projects\\drivers\")',
-            'microsoftedge':'webdriver.Edge(executable_path=\"c:\\users\jsteele\\projects\\drivers\\MicrosoftWebDriver.exe\")',
+            'microsoftedge':'webdriver.Edge()',
             'opera':'webdriver.Opera()'
         }
 
-        if browser.lower() == '' or browser.lower == None:
-            browser = 'chrome'
-            self.driver = webdriver.Chrome()
-        else:
-            for browser_type in browser_dict:
-                if browser.lower() == browser_type:
-                    self.driver = exec(browser_dict[str(browser)])
-                break
+        if browser.lower() in browser_dict:
+            command = browser_dict.get(browser)
 
-        if mobileType == '':
-            self.driver.maximize_window()
+        # if mobileType == '':
+        #     self.driver.maximize_window()
 
-        return self.driver
+        return command
+        #print("   ***   ")
+
+        # if browser.lower() == '' or browser.lower == None:
+        #     browser = 'chrome'
+        #     self.driver = webdriver.Chrome()
+        # else:
+        #     for browser_type in browser_dict:
+        #         if browser.lower() == browser_type:
+        #             self.driver = exec(browser_dict[str(browser)])
+        #         break
+
 
 
         #caps = {}

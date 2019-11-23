@@ -8,13 +8,12 @@ class Challenge7(unittest.TestCase, DriverManager):
 
     def setUp(self):
         driverManager = DriverManager(webdriver)
-        # self.driver = driverManager.getDriver("chrome", "http://www.copart.com")
-        self.driver = driverManager.getDriver('chrome')
-        # self.driver = driverManager.getDriver("firefox")
-        # self.driver = driverManager.getDriver("internet explorer")
-        # self.driver = driverManager.getDriver("opera")
-        # self.driver = driverManager.getDriver()
-        # self.driver = driverManager.getDriver("MicrosoftEdge")
+        # self.driver = eval(driverManager.getDriver("chrome", "http://www.copart.com"))
+        self.driver = eval(driverManager.getDriver('chrome'))
+        # self.driver = eval(driverManager.getDriver("firefox"))
+        # self.driver = eval(driverManager.getDriver("internet explorer"))
+        # self.driver = eval(driverManager.getDriver("opera"))
+        # self.driver = eval(driverManager.getDriver("microsoftedge"))
 
     def tearDown(self):
         self.driver.close()
