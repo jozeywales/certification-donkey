@@ -1,7 +1,7 @@
 import time
 import unittest
 from selenium import webdriver
-from challenges.challenge7.DriverManager import DriverManager
+from driver_manager import DriverManager
 
 
 class Challenge7(unittest.TestCase, DriverManager):

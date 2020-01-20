@@ -14,7 +14,7 @@ class DriverManager():
             browser = 'chrome'
 
         browser_dict = {
-            'chrome': 'webdriver.Chrome(\"..\\chromedriver.exe\")',
+            'chrome': 'webdriver.Chrome(\"chromedriver.exe\")',
             'firefox':'webdriver.Firefox()',
             'ie':'webdriver.Ie(r\"C:\\Users\\jsteele\\projects\\drivers\\IEDriverServer.exe\")',
             'edge':'webdriver.Edge()',
