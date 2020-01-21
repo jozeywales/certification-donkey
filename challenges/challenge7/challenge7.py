@@ -23,7 +23,7 @@ class Challenge7(unittest.TestCase, DriverManager):
 
     def test_copart_makes_models_section(self):
         makeModelName = []
-        hrefURL = []
+        hrefUrls = []
 
         self.driver.get("https://www.copart.com/")
 
@@ -36,10 +36,10 @@ class Challenge7(unittest.TestCase, DriverManager):
 
         # get the URL for that link into a list
         for hrefValue in makesModelsElems:
-            hrefURL.append(hrefValue.get_attribute("href"))
+            hrefUrls.append(hrefValue.get_attribute("href"))
 
-        # strip the '-' characters, some of the names had them
-        stripped_Urls = [j.replace('-', ' ') for j in hrefURL]
+        # replace the '-' characters, some of the names had them like 'f150-super'
+        stripped_Urls = [j.replace('-', ' ') for j in hrefUrls]
 
         # verify the elements navigate to the correct page
         idx = 0
@@ -48,10 +48,12 @@ class Challenge7(unittest.TestCase, DriverManager):
             self.assertEqual(parts[5], makeModelName[idx].lower())
             # print out info below to demonstrate verification
             # print(parts[5] + ' ' + makeModelName[idx].lower())
-            if parts[5] in str(makeModelName[idx].lower()):
-                print(str(makeModelName[idx]) + "--> The URL is good.")
+            if parts[5] in makeModelName[idx].lower():
+                if idx==0: print()
+                print(makeModelName[idx] + "--> The URL is good.")
             else:
-                print(str(makeModelName[idx]) + "--> There might be a problem with the URL.")
+                if idx==0: print()
+                print(makeModelName[idx] + "--> There might be a problem with the URL.")
             idx += 1
 
 
