@@ -45,7 +45,7 @@ class Challenge7(unittest.TestCase, DriverManager):
         idx = 0
         for item in stripped_Urls:
             parts = item.split("/")
-            self.assertEqual(parts[5], str(makeModelName[idx].lower()))
+            self.assertEqual(parts[5], makeModelName[idx].lower())
             # print out info below to demonstrate verification
             # print(parts[5] + ' ' + makeModelName[idx].lower())
             if parts[5] in str(makeModelName[idx].lower()):
