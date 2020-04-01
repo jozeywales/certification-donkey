@@ -16,7 +16,7 @@ class Challenge8():
     respdict_keys = response_dict.keys()
     respdict_vals = response_dict.values()
     respdict_items = response_dict.items()
-    tot_elements = response_dict['query']['query']['results']['totalElements']
+    tot_elements = response_dict['data']['results']['totalElements']
 
 
 
