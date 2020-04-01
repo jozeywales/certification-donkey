@@ -17,8 +17,7 @@ class Challenge8():
     respdict_vals = response_dict.values()
     respdict_items = response_dict.items()
     tot_elements = response_dict['data']['results']['totalElements']
-
-
+    print(f"The total vehicles found are {tot_elements}")
 
     print('***Done!***')
     # if response:
